@@ -14,5 +14,5 @@ cd Config
 
 :install
 
-bash install.sh install.cfg
+bash install.sh rob.cfg
 
