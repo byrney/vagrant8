@@ -6,14 +6,14 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-    config.vm.box = "Windows8"
+    config.vm.box = "win81"
     config.vm.communicator = "winrm"
     config.vm.guest = :windows   # guest detection fails: https://github.com/mitchellh/vagrant/pull/4996
     config.vm.provider "virtualbox" do |v|
-        v.name = 'vagrant8'
+        v.name = 'vagrant81'
         v.gui = true
         v.customize ["modifyvm", :id, "--memory", "1024"]
-        v.customize ["modifyvm", :id, "--hardwareuuid", "809144e0-3af6-4261-926c-c3abf6abae9c"]
+        # v.customize ["modifyvm", :id, "--hardwareuuid", "809144e0-3af6-4261-926c-c3abf6abae9c"]
     end
 
   #config.vm.network :forwarded_port, guest: 3389, host: 3389, id: 'rdp'

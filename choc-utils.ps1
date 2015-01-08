@@ -14,8 +14,13 @@ cmd /c mklink "c:\Users\All Users\Desktop\GVim" "c:\Program Files\vim\vim74\gvim
 
 write-host "git"
 cinst git
-cmd /c mklink "c:\Users\All Users\Desktop\Git" "c:\Program Files\Git\Git Bash.vbs"
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Program Files\Git\bin", "Machine")
+
+$programfiles=${env:ProgramFiles(x86)}
+if($programfiles -eq "") {
+    $programfiles=${env:ProgramFiles}
+}
+cmd /c mklink "c:\Users\All Users\Desktop\Git" "$programfiles\Git\Git Bash.vbs"
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$programfiles\Git\bin", "Machine")
 
 write-host "cmder mini"
 cinst cmdermini.portable
