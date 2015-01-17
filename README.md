@@ -49,9 +49,27 @@ Create a Vagrant box on the Host
 
 4.  Replace the username in config.cmd where it has Users/Robert
 
-5.  Try it out:
+5.  Try it out: [1]
 
     vagrant up
+
+
+
+[1]  To help with fixing the scripts you can do the following:
+
+    vagrant up --no-provision
+
+which will bring the VM up but not run the provisioning scripts.
+
+Then take a snapshot in Virtualbox to serve as a clean baseline. Then run the
+provisioning
+
+    vagrant provision
+
+
+if it has problems you can restore the snapshot and provision again until it
+works.
+
 
 
 
