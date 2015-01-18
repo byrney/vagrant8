@@ -41,21 +41,24 @@ Create a Vagrant box on the Host
 1.  Shut down the VM
 2.  Back on the host, Export/Package the box
 
-    vagrant package --base <name of VM> --out win81.box
+    vagrant package --base name-of-VM --out win81.box
 
-3.  Once the box is created import it
+3.  Once the box is created import it  [1]
 
     vagrant box add --name win81 --provider virtualbox  win81.box
 
 4.  Replace the username in config.cmd where it has Users/Robert
 
-5.  Try it out: [1]
+5.  Try it out: [2]
 
     vagrant up
 
 
 
-[1]  To help with fixing the scripts you can do the following:
+[1] Once imported, if short on disk space, you can delete the .box file it is
+    no longer needed
+
+[2]  To help with fixing the scripts you can do the following:
 
     vagrant up --no-provision
 
