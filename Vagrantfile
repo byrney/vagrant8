@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   gems.each do |pkg|
       config.vm.provision :shell, inline: "gem install #{pkg}"
   end
-
-  config.vm.synced_folder("/Users/nicolagallo/Documents/NGShare", '/NGShare')
+  host_user = ENV['USER'] || ENV['USERNAME']
+  config.vm.synced_folder("/Users/#{hostuser}", '/Host')
 
 end
