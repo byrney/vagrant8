@@ -1,5 +1,5 @@
 set PATH=%PATH%;c:\Program Files\Git\bin
-set HOME=c:\Users\Robert
+set HOME=c:\Users\vagrant
 cd %HOME%
 if not exist %HOME%\Config\NUL goto clone
 
