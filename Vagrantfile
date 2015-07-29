@@ -35,6 +35,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.provision :shell, inline: "gem install #{pkg}"
   end
   host_user = ENV['USER'] || ENV['USERNAME']
-  config.vm.synced_folder("/Users/#{hostuser}", '/Host')
+  config.vm.synced_folder("/Users/#{host_user}", '/Host')
 
 end
