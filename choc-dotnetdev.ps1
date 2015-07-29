@@ -16,5 +16,5 @@ function make-link
 write-host "Dot net dev tools"
 choco install -y visualstudiocommunity2013dex -source 'c:\vagrant'
 cinst -y NuGet.CommandLine 
-make-link "c:\Users\All Users\Desktop\VS2013" "$programfiles\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
+make-link "c:\Users\Public\Desktop\VS2013" "$programfiles\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 

@@ -25,7 +25,7 @@ cinst -y webpicmd
 write-host "vim"
 cinst -y vim
 $gvimbin = "$programfiles\vim\vim74\gvim.exe"
-$gvimlink = "c:\Users\All Users\Desktop\GVim"
+$gvimlink = "c:\Users\Public\Desktop\GVim"
 make-link "$gvimlink" "$gvimbin"
 
 write-host "git"
@@ -35,6 +35,6 @@ cinst -y git
 
 write-host "cmder mini"
 cinst -y cmdermini.portable
-make-link "c:\Users\All Users\Desktop\Cmder" "c:\tools\cmdermini\Cmder.exe"
+make-link "c:\Users\Public\Desktop\Cmder" "c:\tools\cmdermini\Cmder.exe"
 
 
