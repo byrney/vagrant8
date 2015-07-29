@@ -14,27 +14,27 @@ function make-link
 }
 
 write-host "toolsroot"
-cinst toolsroot
+cinst -y toolsroot
 
 write-host "sysinternals"
-cinst sysinternals
+cinst -y sysinternals
 
 write-host "webpicmd"
-cinst webpicmd
+cinst -y webpicmd
 
 write-host "vim"
-cinst vim
+cinst -y vim
 $gvimbin = "$programfiles\vim\vim74\gvim.exe"
 $gvimlink = "c:\Users\All Users\Desktop\GVim"
 make-link "$gvimlink" "$gvimbin"
 
 write-host "git"
-cinst git
+cinst -y git
 
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$programfiles\Git\bin", "Machine")
 
 write-host "cmder mini"
-cinst cmdermini.portable
+cinst -y cmdermini.portable
 make-link "c:\Users\All Users\Desktop\Cmder" "c:\tools\cmdermini\Cmder.exe"
 
 

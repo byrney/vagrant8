@@ -1,4 +1,6 @@
 
+chocolatey feature enable -n allowGlobalConfirmation
+
 start-process -wait -verb runas cinst ruby
 start-process -wait -verb runas cinst ruby2.devkit 
 start-process -wait -verb runas cinst rubygems
