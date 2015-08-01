@@ -4,7 +4,7 @@ Print 'Running choc-vs2015.ps1'
 
 # Step 1: Install VisualStudio 2015 Community
 Call 'Step 1: Install VisualStudio 2015 Community' { 
-        choco install VisualStudio2015Community -packageParameters "--AdminFile c:\vagrant\choc-vs2015-AdminDeployment.xml"
+        choco install VisualStudio2015Community -packageParameters "--AdminFile c:\vagrant\choc-vs2015-settings-admindeployment.xml"
     }
     
 # Step vs2015AdminDeployment: Nuget CommandLine

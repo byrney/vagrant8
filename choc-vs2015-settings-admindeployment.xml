@@ -9,7 +9,7 @@
     <SelectableItemCustomization Id="MDDJS" Hidden="no" Selected="yes" />
     <SelectableItemCustomization Id="SilverLight_Developer_Kit" Hidden="no" Selected="no" />
     <SelectableItemCustomization Id="ToolsForWin81_WP80_WP81" Hidden="no" Selected="yes" />
-    <SelectableItemCustomization Id="WindowsPhone81Emulators" Hidden="no" Selected="no" />
+    <SelectableItemCustomization Id="WindowsPhone81Emulators" Hidden="no" Selected="yes" />
  
     <SelectableItemCustomization Id="ModernBlendHidden" Selected="yes" />
     <SelectableItemCustomization Id="BlissHidden" Selected="yes" />
