@@ -7,6 +7,6 @@ Call 'Step 1: Install Ruby' {
 		start-process -wait -verb runas cinst rubygems
 		
 		# workaround for missing certs in ruby prior to 2.4
-		echo f | xcopy \\VBOXSRV\vagrant\AddTrustExternalCARoot-2048.pem c:\tools\ruby215\lib\ruby\site_ruby\2.1.0\rubygems\ssl_certs
+		echo f | xcopy c:\vagrant\AddTrustExternalCARoot-2048.pem c:\tools\ruby215\lib\ruby\site_ruby\2.1.0\rubygems\ssl_certs
 		gem source -a http://rubygems.org
     }

@@ -20,9 +20,9 @@
 
 # Step 1: Install Chocolatey
 Call 'Step 1: Install Chocolatey' { 
-        write-host "Install Chocolatey"
+        Print "Install Chocolatey"
           if( get-command choco -errorAction SilentlyContinue ) {
-        	write-host "choco already installed"
+        	Print "choco already installed"
         	break;
         }
         
@@ -38,7 +38,7 @@ Call 'Step 1: Install Chocolatey' {
           [string]$url,
           [string]$file
          )
-          Write-Host "Downloading $url to $file"
+          Print "Downloading $url to $file"
           $downloader = new-object System.Net.WebClient
           $downloader.Proxy.Credentials=[System.Net.CredentialCache]::DefaultNetworkCredentials;
           $downloader.DownloadFile($url, $file)
@@ -48,7 +48,7 @@ Call 'Step 1: Install Chocolatey' {
         Download-File $url $file
         
         # download 7zip
-        Write-Host "Download 7Zip commandline tool"
+        Print "Download 7Zip commandline tool"
         $7zaExe = Join-Path $tempDir '7za.exe'
         
         Download-File 'http://chocolatey.org/7za.exe' "$7zaExe"
@@ -69,7 +69,7 @@ Call 'Step 1: Install Chocolatey' {
         #}
         
         # unzip the package
-        Write-Host "Extracting $file to $tempDir..."
+        Print "Extracting $file to $tempDir..."
         Start-Process "$7zaExe" -ArgumentList "x -o`"$tempDir`" -y `"$file`"" -Wait -NoNewWindow
         #$shellApplication = new-object -com shell.application 
         #$zipPackage = $shellApplication.NameSpace($file) 
@@ -77,13 +77,13 @@ Call 'Step 1: Install Chocolatey' {
         #$destinationFolder.CopyHere($zipPackage.Items(),0x10)
         
         # call chocolatey install
-        Write-Host "Installing chocolatey on this machine"
+        Print "Installing chocolatey on this machine"
         $toolsFolder = Join-Path $tempDir "tools"
         $chocInstallPS1 = Join-Path $toolsFolder "chocolateyInstall.ps1"
         
         & $chocInstallPS1
         
-        write-host 'Ensuring chocolatey commands are on the path'
+        Print 'Ensuring chocolatey commands are on the path'
         $chocInstallVariableName = "ChocolateyInstall"
         $chocoPath = [Environment]::GetEnvironmentVariable($chocInstallVariableName, [System.EnvironmentVariableTarget]::User)
         $chocoExePath = 'C:\Chocolatey\bin'
@@ -96,6 +96,6 @@ Call 'Step 1: Install Chocolatey' {
         }
         
         # update chocolatey to the latest version
-        #Write-Host "Updating chocolatey to the latest version"
+        #Print "Updating chocolatey to the latest version"
         #cup chocolatey
     }
