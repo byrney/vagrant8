@@ -1,24 +1,40 @@
+$programfiles=${env:ProgramFiles(x86)}
+if($programfiles -eq "") {
+    $programfiles=${env:ProgramFiles}
+}
+
+function make-link
+{
+    $link = $args[0];
+    $dest = $args[1];
+    if(test-path "$link") {
+        rm "$link"
+    }
+    cmd /c mklink  "$link" "$dest"
+}
 
 write-host "toolsroot"
-cinst toolsroot
+cinst -y toolsroot
 
 write-host "sysinternals"
-cinst sysinternals
+cinst -y sysinternals
 
 write-host "webpicmd"
-cinst webpicmd
+cinst -y webpicmd
 
 write-host "vim"
-cinst vim
-cmd /c mklink "c:\Users\All Users\Desktop\GVim" "c:\Program Files\vim\vim74\gvim.exe"
+cinst -y vim
+$gvimbin = "$programfiles\vim\vim74\gvim.exe"
+$gvimlink = "c:\Users\Public\Desktop\GVim"
+make-link "$gvimlink" "$gvimbin"
 
 write-host "git"
-cinst git
-cmd /c mklink "c:\Users\All Users\Desktop\Git" "c:\Program Files\Git\Git Bash.vbs"
-[Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Program Files\Git\bin", "Machine")
+cinst -y git
+
+[Environment]::SetEnvironmentVariable("Path", $env:Path + ";$programfiles\Git\bin", "Machine")
 
 write-host "cmder mini"
-cinst cmdermini.portable
-cmd /c mklink "c:\Users\All Users\Desktop\Cmder" "c:\tools\cmdermini\Cmder.exe"
+cinst -y cmdermini.portable
+make-link "c:\Users\Public\Desktop\Cmder" "c:\tools\cmdermini\Cmder.exe"
 
 

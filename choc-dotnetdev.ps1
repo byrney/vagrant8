@@ -1,10 +1,20 @@
+$programfiles=${env:ProgramFiles(x86)}
+if($programfiles -eq "") {
+    $programfiles=${env:ProgramFiles}
+}
+
+function make-link
+{
+    $link = $args[0];
+    $dest = $args[1];
+    if(test-path "$link") {
+        rm "$link"
+    }
+    cmd /c mklink  "$link" "$dest"
+}
 
 write-host "Dot net dev tools"
-# cinst DotNet3.5 VS2010.ShellIntegratedRedist windows-8-1-sdk DotNet4.5 VisualStudio2013Professional NuGet.CommandLine 
-# cinst DotNet3.5 VisualStudio2013Professional NuGet.CommandLine 
-cinst visualstudiocommunity2013  NuGet.CommandLine 
-#[Environment]::SetEnvironmentVariable("VisualStudioVersion", "11.0", "Machine")
-cmd /c mklink "c:\Users\All Users\Desktop\VS2013" "c:\program files\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
-write-host "IISExpress via webpi"
-start-process -wait -verb runas choco -argumentlist 'webpi IISExpress'
+choco install -y visualstudiocommunity2013dex -source '\\VBOXSRV\vagrant'
+cinst -y NuGet.CommandLine 
+make-link "c:\Users\Public\Desktop\VS2013" "$programfiles\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 
