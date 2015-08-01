@@ -21,10 +21,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, host_ip: "127.0.0.1", guest: 5985, host: 5985, id: "winrm", auto_correct: true
 
   # for provisioning we need:
+  config.vm.provision :shell, path: "disable-windows-key.ps1"
   config.vm.provision :shell, path: "Install-Chocolatey.ps1"
   config.vm.provision :shell, path: "choc-settings.ps1"
   config.vm.provision :shell, path: "disable-browser-choice.ps1"
-  config.vm.provision :shell, path: "disable-windows-key.cmd"
   config.vm.provision :shell, path: "choc-utils.ps1"
   config.vm.provision :shell, path: "config.cmd", args: %w(Robert byrney)
   config.vm.provision :shell, path: "choc-ruby.ps1"
