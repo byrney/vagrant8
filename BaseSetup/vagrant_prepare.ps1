@@ -1,39 +1,4 @@
-function IsWinServer
-{
-    $osname = (Get-WMIObject Win32_OperatingSystem).Caption | Out-String
-    if($osname -match 'Server')
-    {
-        return $true;
-    }
-    return $false;
-}
-
-function UserExists([string] $username)
-{
-    $objOu = [ADSI]"WinNT://${env:ComputerName}"
-    $localUsers = $objOu.Children | where {$_.SchemaClassName -eq 'user'}  |  % {$_.name[0].ToString().ToLower()}
-    Write-Host $localUsers
-    if($localUsers -contains $username.ToLower())
-    {
-        return $true;
-    }
-    return $false;
-}
-
-
-function Call([string]$title, $block)
-{
-    Write-Host '==== START ' $title
-    Try
-    {
-        &$block
-    }
-    Catch [Excpetion] {
-        Write-Host '==== ERROR ' $_.Exception.Message
-        pause
-    }
-    Write-Host '==== END ' $title
-}
+."setuputils.ps1"
 
 $isWinServer = IsWinServer
 
@@ -49,19 +14,16 @@ Call 'Step 1: Disable UAC' {
 
 # Step 2: Disable IE ESC
 Call 'Step 2: Disable IE ESC' { 
-        if($isWinServer -eq $true)
-        {
+        if($isWinServer -eq $true) {
             Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}" -Name "IsInstalled" -Value 0 | Out-Null
             Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}" -Name "IsInstalled" -Value 0 | Out-Null
             Stop-Process -Name Explorer | Out-Null
             Write-Host "IE Enhanced Security Configuration (ESC) has been disabled." -ForegroundColor Green
         }
-        else
-        {
+        else {
             Write-Host 'Skip: Not a WinServer host'
         }
     }
-
 
 # Step 3: Disable the shutdown tracker
 # Reference: http://www.askvg.com/how-to-disable-remove-annoying-shutdown-event-tracker-in-windows-server-2003-2008/
@@ -76,7 +38,6 @@ Call 'Step 3: Disable the shutdown tracker' {
         Write-Host "Shutdown Tracker has been disabled." -ForegroundColor Green
     }
 
-
 # Step 4: Disable Automatic Updates
 # Reference: http://www.benmorris.me/2012/05/1st-test-blog-post.html
 Call 'Step 4: Disable Automatic Updates' { 
@@ -85,7 +46,6 @@ Call 'Step 4: Disable Automatic Updates' {
         $AutoUpdate.Save()
         Write-Host "Windows Update has been disabled." -ForegroundColor Green
     }
-
 
 # Step 5: Disable Complex Passwords
 # Reference: http://vlasenko.org/2011/04/27/removing-password-complexity-requirements-from-windows-server-2008-core/
@@ -107,7 +67,6 @@ Call 'Step 6: Enable Remote Desktop' {
         set-netconnectionprofile -InterfaceAlias Ethernet -NetworkCategory Private
     }
 
-
 # Step 7: Enable WinRM Control
 Call 'Step 7: Enable WinRM Control' { 
         winrm quickconfig -q
@@ -118,7 +77,6 @@ Call 'Step 7: Enable WinRM Control' {
         Write-Host "WinRM has been configured and enabled." -ForegroundColor Green
     }
 
-
 # Step 8: Disable Windows Firewall
 Call 'Step 8: Disable Windows Firewall' { 
         &netsh "advfirewall" "set" "allprofiles" "state" "off"
@@ -128,8 +86,7 @@ Call 'Step 8: Disable Windows Firewall' {
 # Step 9: Create local vagrant user
 Call 'Step 9: Create local vagrant user' { 
         $userexists = UserExists('vagrant')
-        if($userexists -eq $false)
-        {
+        if($userexists -eq $false) {
             $userDirectory = [ADSI]"WinNT://localhost"
             $user = $userDirectory.Create("User", "vagrant")
             $user.SetPassword("vagrant")
@@ -141,8 +98,7 @@ Call 'Step 9: Create local vagrant user' {
             &net "localgroup" "administrators" "/add" "vagrant"
             Write-Host "User: 'vagrant' has been created as a local administrator." -ForegroundColor Green
         }
-        else
-        {
+        else {
             Write-Host "vagrant user already exists."
         }
     }

@@ -1,0 +1,1 @@
+rmdir c:\vagrant /s /q

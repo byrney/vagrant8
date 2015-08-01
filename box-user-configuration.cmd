@@ -9,10 +9,11 @@ git pull
 goto install
 
 :clone
+REM git clone https://github.com/ngallo/BoxConfig.git
+REM cd BoxConfig
 git clone https://github.com/byrney/Config.git
 cd Config
 
 :install
 
-bash install.sh rob.cfg
-
+bash install.sh ngallo.cfg
