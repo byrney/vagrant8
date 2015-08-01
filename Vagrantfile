@@ -26,7 +26,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "disable-browser-choice.ps1"
   config.vm.provision :shell, path: "disable-windows-key.cmd"
   config.vm.provision :shell, path: "choc-utils.ps1"
-  config.vm.provision :shell, path: "config.cmd"
+  config.vm.provision :shell, path: "config.cmd", args: %w(Robert byrney)
   config.vm.provision :shell, path: "choc-ruby.ps1"
   config.vm.provision :shell, path: "choc-dotnetdev.ps1"
   config.vm.provision :shell, path: "choc-dexdev.ps1"
