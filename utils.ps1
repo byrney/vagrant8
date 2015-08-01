@@ -17,6 +17,13 @@ function Call([string]$title, $block) {
     Print $text
 }
 
+function CreateDir([string]$targetdir) {
+    if(!(Test-Path -Path $targetdir )){
+        New-Item -ItemType directory -Path $targetdir
+        Print 'Creted directory ' + $targetdir
+    }
+}
+
 function make-link {
     $link = $args[0];
     $dest = $args[1];

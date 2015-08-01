@@ -38,7 +38,9 @@ Call 'Step 1: Install Ruby' {
 		start-process -wait -verb runas cinst ruby2.devkit
 		start-process -wait -verb runas cinst -argumentlist "rubygems -version 2.4.1.0"
 
+		CreateDir c:\tools\ruby21\lib\ruby\site_ruby\2.1.0\rubygems\ssl_certs\
 		$cert | out-file -filepath c:\tools\ruby21\lib\ruby\site_ruby\2.1.0\rubygems\ssl_certs\AddTrustExternalCARoot.pem
+
 		# workaround for missing certs in ruby prior to 2.4
 		#echo f | xcopy /i /d \vagrant\AddTrustExternalCARoot-2048.pem c:\tools\ruby21\lib\ruby\site_ruby\2.1.0\rubygems\ssl_certs\
 		#gem source -a http://rubygems.org
