@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "choc-utils.ps1"
   config.vm.provision :shell, path: "choc-ruby.ps1"
   config.vm.provision :shell, path: "choc-erlang.ps1"
-  config.vm.provision :shell, path: "box-user-configuration.cmd"
+  config.vm.provision :shell, path: "box-configuration-user.cmd"
   config.vm.provision :shell, path: "box-cleanup.cmd"
 
   gems = %w(bundler )

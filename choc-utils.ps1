@@ -1,4 +1,6 @@
 ."c:\vagrant\utils.ps1"
+
+Print 'Running choc-utils.ps1'
     
 $programfiles=${env:ProgramFiles(x86)}
 if($programfiles -eq "") {
@@ -45,3 +47,5 @@ Call 'Step 6: cmder mini' {
         cinst -y cmdermini.portable
         make-link "c:\Users\Public\Desktop\Cmder" "c:\tools\cmdermini\Cmder.exe"
     }
+
+Print 'Completed choc-utils.ps1'

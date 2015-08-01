@@ -17,6 +17,8 @@
 # ==============================================================================
 
 ."c:\vagrant\utils.ps1"
+    
+Print 'Running install-chocolatey.ps1'
 
 # Step 1: Install Chocolatey
 Call 'Step 1: Install Chocolatey' { 
@@ -99,3 +101,5 @@ Call 'Step 1: Install Chocolatey' {
         #Print "Updating chocolatey to the latest version"
         #cup chocolatey
     }
+
+Print 'Completed install-chocolatey.ps1'
