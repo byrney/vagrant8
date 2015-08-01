@@ -4,16 +4,16 @@ function Print([string]$text) {
 }
 
 function Call([string]$title, $block) {
-    $text = '==== START ' + $title
+    $text = '---[START]--> ' + $title
     Print $text
     Try {
         &$block
     }
-    Catch [Excpetion] {
-        $text = '==== ERROR ' + $_.Exception.Message
+    Catch [Exception] {
+        $text = '---[ERROR]--> ' + $_.Exception.Message
         Print $text
     }
-    $text = '==== END ' + $title
+    $text = '---[END]--> ' + $title
     Print $text
 }
 

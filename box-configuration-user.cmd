@@ -2,6 +2,7 @@
 
 if [%1]==[] goto missingargs
 if [%2]==[] goto missingargs
+if [%3]==[] goto missingargs
 
 
 set PATH=%PATH%;c:\Program Files\Git\bin
@@ -20,7 +21,7 @@ cd Config
 
 :install
 
-bash install.sh rob.cfg
+bash install.sh %3.cfg
 
 goto done
 
