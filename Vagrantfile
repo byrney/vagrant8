@@ -22,14 +22,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # for provisioning we need:
   config.vm.provision :shell, path: "box-setup.cmd"
-  config.vm.provision :shell, path: "disable-browser-choice.ps1"
-  config.vm.provision :shell, path: "disable-windows-key.cmd"
-  config.vm.provision :shell, path: "install-chocolatey.ps1"
+  config.vm.provision :shell, path: "os-disable-browser-choice.ps1"
+  config.vm.provision :shell, path: "os-disable-windows-key.ps1"
+  config.vm.provision :shell, path: "install-choc.ps1"
   config.vm.provision :shell, path: "choc-settings.ps1"
   config.vm.provision :shell, path: "choc-utils.ps1"
   config.vm.provision :shell, path: "choc-ruby.ps1"
+  config.vm.provision :shell, path: "box-configuration-user.cmd", args: %w(Robert byrney)
   config.vm.provision :shell, path: "choc-erlang.ps1"
-  config.vm.provision :shell, path: "box-configuration-user.cmd"
+  config.vm.provision :shell, path: "choc-vs2015.ps1"
   config.vm.provision :shell, path: "box-cleanup.cmd"
 
   gems = %w(bundler )

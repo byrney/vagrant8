@@ -3,7 +3,7 @@
 Print 'Running choc-utils.ps1'
     
 $programfiles=${env:ProgramFiles(x86)}
-if($programfiles -eq "") {
+if ($programfiles -eq "") {
     $programfiles=${env:ProgramFiles}
 }
 
@@ -13,19 +13,19 @@ Call 'Step 1: toolsroot' {
         cinst -y toolsroot
     }
 
-# Step 1: sysinternals
+# Step 2: sysinternals
 Call 'Step 2: sysinternals' { 
         Print "sysinternals"
         cinst -y sysinternals
     }
 
-# Step 1: webpicmd
+# Step 3: webpicmd
 Call 'Step 3: webpicmd' { 
         Print "webpicmd"
         cinst -y webpicmd
     }
 
-# Step 1: vim
+# Step 4: vim
 Call 'Step 4: vim' { 
         Print "vim"
         cinst -y vim
@@ -34,14 +34,14 @@ Call 'Step 4: vim' {
         make-link "$gvimlink" "$gvimbin"
     }
 
-# Step 1: git
+# Step 5: git
 Call 'Step 5: git' { 
         Print "git"
         cinst -y git
         [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$programfiles\Git\bin", "Machine")
     }
 
-# Step 1: cmder mini
+# Step 6: cmder mini
 Call 'Step 6: cmder mini' { 
         Print "cmder mini"
         cinst -y cmdermini.portable
