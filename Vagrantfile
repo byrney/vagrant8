@@ -28,16 +28,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "choc-settings.ps1"
   config.vm.provision :shell, path: "choc-utils.ps1"
   config.vm.provision :shell, path: "choc-ruby.ps1"
+  gems = %w(bundler )
+  gems.each do |pkg|
+      config.vm.provision :shell, inline: "gem install #{pkg}"
+  end
   config.vm.provision :shell, path: "choc-erlang.ps1"
   config.vm.provision :shell, path: "box-configuration-user.cmd", args: %w(Robert byrne Config rob)
   #config.vm.provision :shell, path: "box-configuration-user.cmd", args: %w(vagrant ngallo BoxConfig ngallo)
   config.vm.provision :shell, path: "choc-vs2015.ps1"
   config.vm.provision :shell, path: "box-cleanup.cmd"
-
-  gems = %w(bundler )
-  gems.each do |pkg|
-      config.vm.provision :shell, inline: "gem install #{pkg}"
-  end
+  
   host_user = ENV['USER'] || ENV['USERNAME']
   config.vm.synced_folder("/Users/#{host_user}", '/Host')
 
