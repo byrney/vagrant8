@@ -12,10 +12,12 @@ function Print([string]$output) {
 }
 
 function Call([string]$title, $block) {
-    $text = 'Started step ' + $step + ': ' + $title
+    $sw = [Diagnostics.Stopwatch]::StartNew()
+    $text = 'Started task ' + $step + ': ' + $title
     Print $text
     &$block
-    $text = 'Completed step ' + $step + ': ' + $title
+    $sw.Stop()
+    $text = 'Completed task ' + $step + ': ' + $title + ' - Elapsed: ' + $sw.Elapsed
     Print $text
     $step = $step + 1
 }
