@@ -40,7 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision_ps("pslib.ps1", "Install-Chocolatey.ps1")
     config.vm.provision_ps("pslib.ps1", "choc-settings.ps1")
     config.vm.provision_ps( "pslib.ps1", "choc-utils.ps1", "choc-ruby.ps1")
-    config.vm.provision :shell, path: "config.cmd", args: %w(Robert byrne Config rob)
+    config.vm.provision :shell, path: "config.cmd", args: %w(Robert byrney Config rob)
     #config.vm.provision :shell, path: "config.cmd", args: %w(Nicola ngallo BoxConfig ngallo)
     config.vm.provision_gem('bundler')
     config.vm.provision_ps("pslib.ps1",  "choc-dotnetdev2013.ps1")
