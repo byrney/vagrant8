@@ -28,7 +28,7 @@ function Call([string]$title, $block)
     {
         &$block
     }
-    Catch [Excpetion] {
+    Catch [Exception] {
         Write-Host '==== ERROR ' $_.Exception.Message
         pause
     }
