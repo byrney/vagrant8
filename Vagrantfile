@@ -28,13 +28,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "choc-utils.ps1"
   config.vm.provision :shell, path: "config.cmd", args: %w(Robert byrney)
   config.vm.provision :shell, path: "choc-ruby.ps1"
-  config.vm.provision :shell, path: "choc-dotnetdev.ps1"
-  config.vm.provision :shell, path: "choc-dexdev.ps1"
-
   gems = %w(bundler )
   gems.each do |pkg|
       config.vm.provision :shell, inline: "gem install #{pkg}"
   end
+  config.vm.provision :shell, path: "choc-dotnetdev.ps1"
+  config.vm.provision :shell, path: "choc-dexdev.ps1"
+
   host_user = ENV['USER'] || ENV['USERNAME']
   config.vm.synced_folder("/Users/#{host_user}", '/Host')
 
