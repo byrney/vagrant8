@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.provision :shell, inline: "gem install #{pkg}"
   end
   config.vm.provision :shell, path: "choc-erlang.ps1"
-  config.vm.provision :shell, path: "box-configuration-user.cmd", args: %w(Robert byrne Config rob)
+  config.vm.provision :shell, path: "box-configuration-user.cmd", args: %w(Robert byrney Config rob)
   #config.vm.provision :shell, path: "box-configuration-user.cmd", args: %w(vagrant ngallo BoxConfig ngallo)
   config.vm.provision :shell, path: "choc-vs2015.ps1"
   config.vm.provision :shell, path: "box-cleanup.cmd"
