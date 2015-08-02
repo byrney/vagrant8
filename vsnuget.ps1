@@ -1,7 +1,5 @@
-Print 'Running install-vsnuget'
-
-# Step 1: Install VisualStudio 2015 Community
-Call 'Step 1: Install NuGet' { 
+# Install VisualStudio 2015 Community
+Call 'Install NuGet' { 
 		if(!(test-path -path c:\tmp\vsnuget.vsi))
 		{
 			write-host "Downloading NUGET VSI"
@@ -11,5 +9,3 @@ Call 'Step 1: Install NuGet' {
 		start-process -wait -verb runas "c:\tmp\nsnuget.vsi" -argumentList '/silent /log c:\tmp\ssdt.log'
 		write-host "NUGET Complete"
     }
-
-Print 'Completed install-vsnuget'

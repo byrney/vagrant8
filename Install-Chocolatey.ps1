@@ -16,10 +16,8 @@
 # specific language governing permissions and limitations under the License.
 # ==============================================================================
 
-Print 'Running install-chocolatey'
-
-# Step 1: Install Chocolatey
-Call 'Step 1: Install Chocolatey' { 
+# Install Chocolatey
+Call 'Install Chocolatey' { 
         Print "Install Chocolatey"
           if( get-command choco -errorAction SilentlyContinue ) {
         	Print "choco already installed"
@@ -99,5 +97,3 @@ Call 'Step 1: Install Chocolatey' {
         #Print "Updating chocolatey to the latest version"
         #cup chocolatey
     }
-
-Print 'Completed install-chocolatey'

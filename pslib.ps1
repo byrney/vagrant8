@@ -1,27 +1,23 @@
 
+$step = 1
+
 $programfiles=${env:ProgramFiles(x86)}
 if($programfiles -eq "") {
     $programfiles=${env:ProgramFiles}
 }
 
-function Print([string]$text) {
+function Print([string]$output) {
+    $text = '[' + $(get-date -f HH:mm:ss) + '] ' + $output
     Write-Host $text
-    CreateDir c:\vagrant-logs
-    $text | Out-File c:\vagrant-logs\vagrant.log -Append
 }
 
 function Call([string]$title, $block) {
-    $text = '---[START]--> ' + $title
+    $text = 'Started step ' + $step + ': ' + $title
     Print $text
-    Try {
-        &$block
-    }
-    Catch [Exception] {
-        $text = '---[ERROR]--> ' + $_.Exception.Message
-        Print $text
-    }
-    $text = '---[END]--> ' + $title
+    &$block
+    $text = 'Completed step ' + $step + ': ' + $title
     Print $text
+    $step = $step + 1
 }
 
 function CreateDir([string]$targetdir) {
