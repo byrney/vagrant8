@@ -28,7 +28,7 @@ function Call([string]$title, $block)
     {
         &$block
     }
-    Catch [Excpetion] {
+    Catch [Exception] {
         Write-Host '==== ERROR ' $_.Exception.Message
         pause
     }
@@ -102,11 +102,13 @@ Call 'Step 5: Disable Complex Passwords' {
 # Reference: http://social.technet.microsoft.com/Forums/windowsserver/en-US/323d6bab-e3a9-4d9d-8fa8-dc4277be1729/enable-remote-desktop-connections-with-powershell
 Call 'Step 6: Enable Remote Desktop' { 
         (Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1) 
-        (Get-WmiObject -Class "Win32_TSGeneralSetting" -Namespace root\cimv2\TerminalServices -Filter "TerminalName='RDP-tcp'").SetUserAuthenticationRequired(0) 
-        # set the ethernet network to be private before attempting to activate winrm
-        set-netconnectionprofile -InterfaceAlias Ethernet -NetworkCategory Private
+        (Get-WmiObject -Class "Win32_TSGeneralSetting" -Namespace root\cimv2\TerminalServices -Filter "TerminalName='eDP-tcp'").SetUserAuthenticationRequired(0) 
     }
 
+Call 'Step 6a: Private networking' { 
+        # set the ethernet network to be private before attempting to activate winrm
+        set-netconnectionprofile -InterfaceAlias Ethernet -NetworkCategory Private
+        }
 
 # Step 7: Enable WinRM Control
 Call 'Step 7: Enable WinRM Control' { 
@@ -118,6 +120,8 @@ Call 'Step 7: Enable WinRM Control' {
         Write-Host "WinRM has been configured and enabled." -ForegroundColor Green
     }
 
+# make winrm start auto
+sc config "WinRM" start=auto
 
 # Step 8: Disable Windows Firewall
 Call 'Step 8: Disable Windows Firewall' { 
