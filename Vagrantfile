@@ -23,12 +23,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.extend(ProvisionHelpers)
     config.vm.box = "win81"
+#    config.vm.boot_timeout = 6000
     config.vm.communicator = "winrm"
+#    config.winrm.max_tries = 500
+#    config.winrm.timeout = 60
     config.vm.guest = :windows   # guest detection fails: https://github.com/mitchellh/vagrant/pull/4996
     config.vm.provider "virtualbox" do |v|
         v.name = 'vagrant81'
         v.gui = true
-        v.customize ["modifyvm", :id, "--memory", "1024"]
+        v.customize ["modifyvm", :id, "--memory", "2048"]
+        v.customize ["modifyvm", :id, "--vram", "256"]
         # v.customize ["modifyvm", :id, "--hardwareuuid", "809144e0-3af6-4261-926c-c3abf6abae9c"]
     end
 
