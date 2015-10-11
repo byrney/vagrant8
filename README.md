@@ -19,21 +19,29 @@ Create the base as a Guest
 2.  Apply as many windows updates as possible  rebooting and repeating as
     necessary
 3.  Install Virtualbox guest additions (menu item in VirtualBox)
-4.  Copy the BaseSetup scripts onto the VM somehow (share a folder from the
+4.  Enable 3d and 2d acceleration in Virtualbox Video
+5.  Change the boot order to HDD first
+6.  Copy the BaseSetup scripts onto the VM somehow (share a folder from the
     host is probably easiest)
-5.  In an admin shell run Basesetup/vagrant_prepare.ps1 which will 
+7.  In an admin shell run Basesetup/vagrant_prepare.ps1 which will
     * Create the vagrant user
     * Mark the network as private
     * Enable winrm
-6.  Apply any other customizations you want to the box
-7.  Wait for the windows updates to complete.
-8.  Unmap any shared folders from the guest if you created any
-9.  Run the BaseSetup/compact.ps1 script which will attempt to clean the hard
+8.  Apply any other customizations you want to the box
+    * Show hidden files
+    * Disable or delay start services
+    * Optimize visuals for performance
+    * Change privacy settings
+    * and so on...
+9.  Wait for the windows updates to complete.
+10. Unmap any shared folders from the guest if you created any
+11. Eject the Guest Additions CD
+12. Run the BaseSetup/compact.ps1 script which will attempt to clean the hard
     disk as much as possible.
-10. Reboot your VM and make sure it all comes up ok
-11. Run the compact script one more time
+13. Reboot your VM and make sure it all comes up ok
+14. Run the compact script one more time
 
-Now you have your windows base image set up in VirtualBox. 
+Now you have your windows base image set up in VirtualBox.
 
 Create a Vagrant box on the Host
 -------------------------------
