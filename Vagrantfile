@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     #config.vm.network :forwarded_port, guest: 3389, host: 3389, id: 'rdp'
     config.vm.network :forwarded_port, host_ip: "127.0.0.1", guest: 5985, host: 5985, id: "winrm", auto_correct: true
-
+    config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
     # for provisioning we need:
     config.vm.provision_ps("pslib.ps1", "disable-browser-choice.ps1", "disable-windows-key.ps1")
     config.vm.provision :shell, path: "Install-Chocolatey.ps1"
