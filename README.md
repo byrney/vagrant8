@@ -9,8 +9,9 @@ Get the scripts onto the Host
 
     git clone <remote repo url>
 
-2.  Switch to the x64 branch  (should work for 32 bit windows but contains the
-    newest version of the scripts
+2.  Switch to the rob  branch
+
+    git checkout rob
 
 Create the base as a Guest
 -------------------------
@@ -26,7 +27,7 @@ Create the base as a Guest
 7.  In an admin shell run Basesetup/vagrant_prepare.ps1 which will
     * Create the vagrant user
     * Mark the network as private
-    * Enable winrm
+    * Enable winrm and RDP
 8.  Apply any other customizations you want to the box
     * Show hidden files
     * Disable or delay start services
@@ -76,7 +77,6 @@ Then take a snapshot in Virtualbox to serve as a clean baseline. Then run the
 provisioning
 
     vagrant provision
-
 
 if it has problems you can restore the snapshot and provision again until it
 works.
