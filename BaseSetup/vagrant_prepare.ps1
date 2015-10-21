@@ -42,13 +42,13 @@ $isWinServer = IsWinServer
 Set-ExecutionPolicy -executionpolicy remotesigned -force
 
 # Step 1: Disable UAC
-Call 'Step 1: Disable UAC' { 
+Call 'Step 1: Disable UAC' {
         New-ItemProperty -Path HKLM:Software\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -PropertyType DWord -Value 0 -Force | Out-Null
         Write-Host "User Access Control (UAC) has been disabled." -ForegroundColor Green
     }
 
 # Step 2: Disable IE ESC
-Call 'Step 2: Disable IE ESC' { 
+Call 'Step 2: Disable IE ESC' {
         if($isWinServer -eq $true)
         {
             Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}" -Name "IsInstalled" -Value 0 | Out-Null
@@ -65,12 +65,12 @@ Call 'Step 2: Disable IE ESC' {
 
 # Step 3: Disable the shutdown tracker
 # Reference: http://www.askvg.com/how-to-disable-remove-annoying-shutdown-event-tracker-in-windows-server-2003-2008/
-Call 'Step 3: Disable the shutdown tracker' { 
+Call 'Step 3: Disable the shutdown tracker' {
         If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability")) {
           New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability"
         }
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability" -Name "ShutdownReasonOn" -PropertyType DWord -Value 0 -Force -ErrorAction continue 
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability" -Name "ShutdownReasonUI" -PropertyType DWord -Value 0 -Force -ErrorAction continue 
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability" -Name "ShutdownReasonOn" -PropertyType DWord -Value 0 -Force -ErrorAction continue
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability" -Name "ShutdownReasonUI" -PropertyType DWord -Value 0 -Force -ErrorAction continue
         Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability" -Name "ShutdownReasonOn" -Value 0
         Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Reliability" -Name "ShutdownReasonUI" -Value 0
         Write-Host "Shutdown Tracker has been disabled." -ForegroundColor Green
@@ -79,7 +79,7 @@ Call 'Step 3: Disable the shutdown tracker' {
 
 # Step 4: Disable Automatic Updates
 # Reference: http://www.benmorris.me/2012/05/1st-test-blog-post.html
-Call 'Step 4: Disable Automatic Updates' { 
+Call 'Step 4: Disable Automatic Updates' {
         $AutoUpdate = (New-Object -com "Microsoft.Update.AutoUpdate").Settings
         $AutoUpdate.NotificationLevel = 1
         $AutoUpdate.Save()
@@ -89,7 +89,7 @@ Call 'Step 4: Disable Automatic Updates' {
 
 # Step 5: Disable Complex Passwords
 # Reference: http://vlasenko.org/2011/04/27/removing-password-complexity-requirements-from-windows-server-2008-core/
-Call 'Step 5: Disable Complex Passwords' { 
+Call 'Step 5: Disable Complex Passwords' {
         $seccfg = [IO.Path]::GetTempFileName()
         secedit /export /cfg $seccfg
         (Get-Content $seccfg) | Foreach-Object {$_ -replace "PasswordComplexity\s*=\s*1", "PasswordComplexity=0"} | Set-Content $seccfg
@@ -100,18 +100,18 @@ Call 'Step 5: Disable Complex Passwords' {
 
 # Step 6: Enable Remote Desktop
 # Reference: http://social.technet.microsoft.com/Forums/windowsserver/en-US/323d6bab-e3a9-4d9d-8fa8-dc4277be1729/enable-remote-desktop-connections-with-powershell
-Call 'Step 6: Enable Remote Desktop' { 
-        (Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1) 
-        (Get-WmiObject -Class "Win32_TSGeneralSetting" -Namespace root\cimv2\TerminalServices -Filter "TerminalName='eDP-tcp'").SetUserAuthenticationRequired(0) 
+Call 'Step 6: Enable Remote Desktop' {
+        (Get-WmiObject Win32_TerminalServiceSetting -Namespace root\cimv2\TerminalServices).SetAllowTsConnections(1,1)
+        (Get-WmiObject -Class "Win32_TSGeneralSetting" -Namespace root\cimv2\TerminalServices -Filter "TerminalName='eDP-tcp'").SetUserAuthenticationRequired(0)
     }
 
-Call 'Step 6a: Private networking' { 
+Call 'Step 6a: Private networking' {
         # set the ethernet network to be private before attempting to activate winrm
         set-netconnectionprofile -InterfaceAlias Ethernet -NetworkCategory Private
         }
 
 # Step 7: Enable WinRM Control
-Call 'Step 7: Enable WinRM Control' { 
+Call 'Step 7: Enable WinRM Control' {
         winrm quickconfig -q
         winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="512"}'
         winrm set winrm/config '@{MaxTimeoutms="1800000"}'
@@ -124,13 +124,13 @@ Call 'Step 7: Enable WinRM Control' {
 sc config "WinRM" start=auto
 
 # Step 8: Disable Windows Firewall
-Call 'Step 8: Disable Windows Firewall' { 
+Call 'Step 8: Disable Windows Firewall' {
         &netsh "advfirewall" "set" "allprofiles" "state" "off"
         Write-Host "Windows Firewall has been disabled." -ForegroundColor Green
     }
 
 # Step 9: Create local vagrant user
-Call 'Step 9: Create local vagrant user' { 
+Call 'Step 9: Create local vagrant user' {
         $userexists = UserExists('vagrant')
         if($userexists -eq $false)
         {
