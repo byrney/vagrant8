@@ -1,0 +1,15 @@
+---
+- hosts: windows
+  tasks:
+    - name: Run script
+      script: choc-utils.ps1
+      register: scdebug
+    - debug: var=scdebug
+    - name: run ipconfig
+      raw: ipconfig
+      register: ipconfig
+    - debug: var=ipconfig
+  # Install notepadplusplus version 6.6
+    - name: Install chocolatey
+      win_chocolatey:
+      name: notepadplusplus.install
