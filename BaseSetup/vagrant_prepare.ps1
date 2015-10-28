@@ -120,8 +120,8 @@ Call 'Step 7: Enable WinRM Control' {
         Write-Host "WinRM has been configured and enabled." -ForegroundColor Green
     }
 
-# make winrm start auto
-Set-Service -name WinRM -startuptype automatic
+# make winrm start auto  (no ps command for this)
+invoke-expression "sc.exe config winrm start=auto"
 
 # Step 8: Disable Windows Firewall
 Call 'Step 8: Disable Windows Firewall' {
