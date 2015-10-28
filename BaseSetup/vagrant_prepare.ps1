@@ -107,7 +107,7 @@ Call 'Step 6: Enable Remote Desktop' {
 
 Call 'Step 6a: Private networking' {
         # set the ethernet network to be private before attempting to activate winrm
-        set-netconnectionprofile -InterfaceAlias Ethernet -NetworkCategory Private
+        get-netadapter | set-netconnectionprofile -NetworkCategory Private
         }
 
 # Step 7: Enable WinRM Control
@@ -121,7 +121,7 @@ Call 'Step 7: Enable WinRM Control' {
     }
 
 # make winrm start auto
-sc config "WinRM" start=auto
+Set-Service -name WinRM -startuptype automatic
 
 # Step 8: Disable Windows Firewall
 Call 'Step 8: Disable Windows Firewall' {
